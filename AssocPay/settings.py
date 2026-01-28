@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 from pathlib import Path
+from dotenv import load_dotenv
 import os
 from datetime import timedelta
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +48,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework', 
     'rest_framework_simplejwt',
+    'drf_yasg',
+
 
     #Project app
     'core',
@@ -226,3 +231,5 @@ AUTH_USER_MODEL = "core.User"
 CORS_ALLOWED_ORIGINS = [
 "http://localhost:5173",
 ]
+
+FRONTEND_SITE_URL=os.environ.get('FRONTEND_SITE_URL')

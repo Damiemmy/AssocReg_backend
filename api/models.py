@@ -84,8 +84,9 @@ class Event(models.Model):
 class Transaction(models.Model):
     STATUS_CHOICES = (
         ('pending', 'Pending'),
-        ('success', 'Success'),
+        ('paid', 'Paid'),
         ('failed', 'Failed'),
+        ('unpaid', 'Unpaid'),
     )
 
     user = models.ForeignKey(
@@ -105,7 +106,7 @@ class Transaction(models.Model):
 
     reference = models.CharField(max_length=100, unique=True)
     amount = models.DecimalField(max_digits=10, decimal_places=2)
-    status = models.CharField(max_length=10, choices=STATUS_CHOICES)
+    status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='unpaid')
     payment_method = models.CharField(max_length=30)
 
     created_at = models.DateTimeField(auto_now_add=True)

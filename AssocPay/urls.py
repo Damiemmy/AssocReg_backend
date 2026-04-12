@@ -31,9 +31,9 @@ from drf_yasg import openapi
 
 schema_view = get_schema_view(
    openapi.Info(
-      title="Codemant LMS Backend APIs",
+      title="AssocPay Backend APIs",
       default_version='v1',
-      description="This is the API documentation for Codemant LMS project APIs",
+      description="This is the API documentation for AssocPay project APIs",
       terms_of_service="https://www.google.com/policies/terms/",
       contact=openapi.Contact(email="damisaemmanuel778@gmail.com"),
       license=openapi.License(name="BSD License"),

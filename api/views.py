@@ -5,8 +5,12 @@ from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from django.core.mail import EmailMultiAlternatives
 from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
 from django.conf import settings
 from decimal import Decimal
+from api.models import Association
+from rest_framework import status
 # Create your views here.
 class RegisterView(generics.CreateAPIView):
     queryset=User.objects.all()
@@ -61,3 +65,15 @@ class PasswordResetEmailVerifyAPIView(generics.RetrieveAPIView):
             print("Password reset link:", link)
 
         return user
+
+@api_view(['POST'])
+def create_association(request):
+    try:
+        name=request.POST.get("assocname")
+        description=request.POST.get("description")
+        createassociation=Association.objects.create(name=name, description=description)
+        createassociation.save()
+        return Response({"message":"association created"}, status=201)
+    except Exception as e:
+        return Response({"error":str(e)},status=400)
+
